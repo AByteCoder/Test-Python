@@ -1,0 +1,16 @@
+{
+	"project-name":"Testcode",
+	"modules" : [
+								{
+									"name":"testcode",
+									"functions":[
+																{
+																	"name":"something",
+																	"cases":[
+																						[[1,2],"Works"]
+																					]
+																}
+															]
+									}
+								]
+}
