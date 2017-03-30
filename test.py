@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 import sys,getopt
+import time
 import json
 def execute_function(function,module):
   function_name = function['name']
   print("Testing "+function_name)
   for test_case in function["cases"]:
-    print("Checking if "+function_name+"("+str(test_case[0])[1:-1]+") returns "+str(test_case[1]))
-    exp = getattr(module,function_name)(*test_case[0])
-    if exp == test_case[1] :
+    print("Checking if "+function_name+"("+str(test_case['input'])[1:-1]+") returns "+str(test_case['output']))
+    exp = getattr(module,function_name)(*test_case['input'])
+    if exp == test_case['output'] :
       print("Testcase Success")
     else:
       print("Testcase Failed , function returned "+str(exp))
@@ -37,6 +38,7 @@ def main():
   with open(config) as jfile:
     cases = json.load(jfile)
   if cases:
+    print(time.strftime("Tested on  %H:%M:%S %d, %b, %Y"))
     if mod == False and func == False:
         execute_whole(cases["modules"],cases["project-name"])
         sys.exit(0)
